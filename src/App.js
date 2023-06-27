@@ -5,6 +5,7 @@ import CalcNumberService from './service/CalcNumberService';
 import MyFunction from './component/Function/Function';
 import MyNumber from './component/Number/Number';
 import MyOption from './component/Option/Option';
+import React from 'react';
 import store from './store';
 
 class MyCalcNumberService extends CalcNumberService {
@@ -127,20 +128,26 @@ const appStateToProps = (state) => {
     mode: state.mode
   };
 };
-function App({ mode }) {
-  console.log("App");
-  return (
-    <div className="App">
-      <div style={{ display: (mode === global.calc.modeNumber) ? "block" : "none" }}>
-        <MyNumber />
+class App extends React.Component {
+  constructor(props) {
+    console.log("App constructor");
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div style={{ display: (this.props.mode === global.calc.modeNumber) ? "block" : "none" }}>
+          <MyNumber />
+        </div>
+        <div style={{ display: (this.props.mode === global.calc.modeFunction) ? "block" : "none" }}>
+          <MyFunction />
+        </div>
+        <div style={{ display: (this.props.mode === global.calc.modeOption) ? "block" : "none" }}>
+          <MyOption />
+        </div>
       </div>
-      <div style={{ display: (mode === global.calc.modeFunction) ? "block" : "none" }}>
-        <MyFunction />
-      </div>
-      <div style={{ display: (mode === global.calc.modeOption) ? "block" : "none" }}>
-        <MyOption />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 export default connect(appStateToProps)(App);

@@ -1,111 +1,132 @@
 import './Function.css';
+import React from 'react';
 
-function MyFunctionC() {
-  console.log("MyFunctionC");
+class MyFunctionC extends React.Component {
+  constructor(props) {
+    console.log("MyFunctionC constructor");
+    super(props);
+
+    // 操作
+    this.onButtonSin = this.onButtonSin.bind(this);
+    this.onButtonCos = this.onButtonCos.bind(this);
+    this.onButtonTan = this.onButtonTan.bind(this);
+    this.onButtonArcSin = this.onButtonArcSin.bind(this);
+    this.onButtonArcCos = this.onButtonArcCos.bind(this);
+    this.onButtonArcTan = this.onButtonArcTan.bind(this);
+    this.onButtonLog = this.onButtonLog.bind(this);
+    this.onButtonLog10 = this.onButtonLog10.bind(this);
+    this.onButtonSqr = this.onButtonSqr.bind(this);
+    this.onButtonExp = this.onButtonExp.bind(this);
+    this.onButtonExp10 = this.onButtonExp10.bind(this);
+    this.onButtonInt = this.onButtonInt.bind(this);
+  }
 
   // 操作
-  const onButtonFunction = ( func ) => {
+  onButtonFunction = ( func ) => {
     if( !global.calc.errorFlag ){
       func();
     }
   };
-  const onButtonSin = () => { onButtonFunction( () => {
+  onButtonSin = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcSin();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonCos = () => { onButtonFunction( () => {
+  onButtonCos = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcCos();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonTan = () => { onButtonFunction( () => {
+  onButtonTan = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcTan();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonArcSin = () => { onButtonFunction( () => {
+  onButtonArcSin = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcArcSin();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonArcCos = () => { onButtonFunction( () => {
+  onButtonArcCos = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcArcCos();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonArcTan = () => { onButtonFunction( () => {
+  onButtonArcTan = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcArcTan();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonLog = () => { onButtonFunction( () => {
+  onButtonLog = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcLog();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonLog10 = () => { onButtonFunction( () => {
+  onButtonLog10 = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcLog10();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonSqr = () => { onButtonFunction( () => {
+  onButtonSqr = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcSqr();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonExp = () => { onButtonFunction( () => {
+  onButtonExp = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcExp();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonExp10 = () => { onButtonFunction( () => {
+  onButtonExp10 = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcExp10();
     global.calcFunctionService.setOp();
   } ); };
-  const onButtonInt = () => { onButtonFunction( () => {
+  onButtonInt = () => { this.onButtonFunction( () => {
     global.calcFunctionService.funcInt();
     global.calcFunctionService.setOp();
   } ); };
 
-  return (
-    <div>
-      <div className="div_row">
-        <div className="button2 func1 div_color_white" onClick={onButtonSin}>
-          <span className="span_font_32 span_color_black">sin</span>
+  render() {
+    console.log("MyFunctionC render");
+    return (
+      <div>
+        <div className="div_row">
+          <div className="button2 func1 div_color_white" onClick={this.onButtonSin}>
+            <span className="span_font_32 span_color_black">sin</span>
+          </div>
+          <div className="button2 func1 div_color_white" onClick={this.onButtonCos}>
+            <span className="span_font_32 span_color_black">cos</span>
+          </div>
+          <div className="button2 func2 div_color_white" onClick={this.onButtonTan}>
+            <span className="span_font_32 span_color_black">tan</span>
+          </div>
         </div>
-        <div className="button2 func1 div_color_white" onClick={onButtonCos}>
-          <span className="span_font_32 span_color_black">cos</span>
+        <div className="div_row">
+          <div className="button2 func1 div_color_white" onClick={this.onButtonArcSin}>
+            <span className="span_font_32 span_color_black">asin</span>
+          </div>
+          <div className="button2 func1 div_color_white" onClick={this.onButtonArcCos}>
+            <span className="span_font_32 span_color_black">acos</span>
+          </div>
+          <div className="button2 func2 div_color_white" onClick={this.onButtonArcTan}>
+            <span className="span_font_32 span_color_black">atan</span>
+          </div>
         </div>
-        <div className="button2 func2 div_color_white" onClick={onButtonTan}>
-          <span className="span_font_32 span_color_black">tan</span>
+        <div className="div_row">
+          <div className="button2 func1 div_color_white" onClick={this.onButtonLog}>
+            <span className="span_font_32 span_color_black">ln</span>
+          </div>
+          <div className="button2 func1 div_color_white" onClick={this.onButtonLog10}>
+            <span className="span_font_32 span_color_black">log</span>
+          </div>
+          <div className="button2 func2 div_color_white" onClick={this.onButtonSqr}>
+            <span className="span_font_32 span_color_black">sqr</span>
+          </div>
+        </div>
+        <div className="div_row">
+          <div className="button3 func1 div_color_white" onClick={this.onButtonExp}>
+            <span className="span_font_32 span_color_black">exp</span>
+          </div>
+          <div className="button3 func1 div_color_white" onClick={this.onButtonExp10}>
+            <span className="span_font_32 span_color_black">exp10</span>
+          </div>
+          <div className="button3 func2 div_color_white" onClick={this.onButtonInt}>
+            <span className="span_font_32 span_color_black">int</span>
+          </div>
         </div>
       </div>
-      <div className="div_row">
-        <div className="button2 func1 div_color_white" onClick={onButtonArcSin}>
-          <span className="span_font_32 span_color_black">asin</span>
-        </div>
-        <div className="button2 func1 div_color_white" onClick={onButtonArcCos}>
-          <span className="span_font_32 span_color_black">acos</span>
-        </div>
-        <div className="button2 func2 div_color_white" onClick={onButtonArcTan}>
-          <span className="span_font_32 span_color_black">atan</span>
-        </div>
-      </div>
-      <div className="div_row">
-        <div className="button2 func1 div_color_white" onClick={onButtonLog}>
-          <span className="span_font_32 span_color_black">ln</span>
-        </div>
-        <div className="button2 func1 div_color_white" onClick={onButtonLog10}>
-          <span className="span_font_32 span_color_black">log</span>
-        </div>
-        <div className="button2 func2 div_color_white" onClick={onButtonSqr}>
-          <span className="span_font_32 span_color_black">sqr</span>
-        </div>
-      </div>
-      <div className="div_row">
-        <div className="button3 func1 div_color_white" onClick={onButtonExp}>
-          <span className="span_font_32 span_color_black">exp</span>
-        </div>
-        <div className="button3 func1 div_color_white" onClick={onButtonExp10}>
-          <span className="span_font_32 span_color_black">exp10</span>
-        </div>
-        <div className="button3 func2 div_color_white" onClick={onButtonInt}>
-          <span className="span_font_32 span_color_black">int</span>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default MyFunctionC;

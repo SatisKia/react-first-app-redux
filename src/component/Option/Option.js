@@ -1,5 +1,6 @@
 import './Option.css';
 import { connect } from "react-redux";
+import React from 'react';
 import store from '../../store';
 
 const myOptionStateToProps = (state) => {
@@ -8,11 +9,14 @@ const myOptionStateToProps = (state) => {
     separatorType: state.separatorType
   };
 };
-function MyOption({ italicFlag, separatorType, dispatch }) {
-  console.log("MyOption");
+class MyOption extends React.Component {
+  constructor(props) {
+    console.log("MyOption constructor");
+    super(props);
+  }
 
   // イタリック
-  const handleChangeItalic = () => {
+  handleChangeItalic = () => {
     console.log("handleChangeItalic");
 
     global.calc.italicFlag = !global.calc.italicFlag;
@@ -22,7 +26,7 @@ function MyOption({ italicFlag, separatorType, dispatch }) {
   };
 
   // 桁区切り
-  const handleChangeSeparatorTypeNone = () => {
+  handleChangeSeparatorTypeNone = () => {
     console.log("handleChangeSeparatorTypeNone");
 
     global.calc.separatorType = global.calc.separatorTypeNone;
@@ -30,7 +34,7 @@ function MyOption({ italicFlag, separatorType, dispatch }) {
 
     store.dispatch({ type: "setSeparatorType", payload: global.calc.separatorType });
   };
-  const handleChangeSeparatorTypeDash = () => {
+  handleChangeSeparatorTypeDash = () => {
     console.log("handleChangeSeparatorTypeDash");
 
     global.calc.separatorType = global.calc.separatorTypeDash;
@@ -38,7 +42,7 @@ function MyOption({ italicFlag, separatorType, dispatch }) {
 
     store.dispatch({ type: "setSeparatorType", payload: global.calc.separatorType });
   };
-  const handleChangeSeparatorTypeComma = () => {
+  handleChangeSeparatorTypeComma = () => {
     console.log("handleChangeSeparatorTypeComma");
 
     global.calc.separatorType = global.calc.separatorTypeComma;
@@ -47,50 +51,58 @@ function MyOption({ italicFlag, separatorType, dispatch }) {
     store.dispatch({ type: "setSeparatorType", payload: global.calc.separatorType });
   };
 
-  const isEnglish = global.calc.isEnglish();
-  const strBack           = isEnglish ? "Return" : "戻る";
-  const strItalic         = isEnglish ? "Display calculation results in italics" : "計算結果をイタリックに";
-  const strSeparator      = isEnglish ? "Separator" : "桁区切り";
-  const strSeparatorNone  = isEnglish ? "None" : "なし";
-  const strSeparatorUpper = isEnglish ? "Upper" : "上部";
-  const strSeparatorLower = isEnglish ? "Lower" : "下部";
+  render() {
+    console.log("MyOption render");
 
-  return (
-    <div className="option_body">
-      <div className="div_return" onClick={() => { dispatch({ type: "setMode", payload: global.calc.returnMode }); }}>
-        <span className="span_return">{strBack}</span>
-      </div>
-      <div className="div_option">
-        <fieldset className="checkbox1">
-          <label>
-            <input type="checkbox" name="checkbox1" checked={italicFlag} onChange={handleChangeItalic} />
-            <span className="span_option">&nbsp;{strItalic}</span>
-          </label>
-        </fieldset>
-        <div className="div_space"></div>
-        <div>
-          <span className="span_option">{strSeparator}:</span>
+    const isEnglish = global.calc.isEnglish();
+    const strBack           = isEnglish ? "Return" : "戻る";
+    const strItalic         = isEnglish ? "Display calculation results in italics" : "計算結果をイタリックに";
+    const strSeparator      = isEnglish ? "Separator" : "桁区切り";
+    const strSeparatorNone  = isEnglish ? "None" : "なし";
+    const strSeparatorUpper = isEnglish ? "Upper" : "上部";
+    const strSeparatorLower = isEnglish ? "Lower" : "下部";
+
+    const italicFlag = this.props.italicFlag;
+    const separatorType = this.props.separatorType;
+    const dispatch = this.props.dispatch;
+
+    return (
+      <div className="option_body">
+        <div className="div_return" onClick={() => { dispatch({ type: "setMode", payload: global.calc.returnMode }); }}>
+          <span className="span_return">{strBack}</span>
         </div>
-        <fieldset className="radio1">
-          <label>
-            <input type="radio" name="radio1" checked={separatorType === global.calc.separatorTypeNone} onChange={handleChangeSeparatorTypeNone} />
-            <span className="span_option">&nbsp;{strSeparatorNone}</span>
-          </label>
-        </fieldset>
-        <fieldset className="radio1">
-          <label>
-            <input type="radio" name="radio1" checked={separatorType === global.calc.separatorTypeDash} onChange={handleChangeSeparatorTypeDash} />
-            <span className="span_option">&nbsp;{strSeparatorUpper}</span>
-          </label>
-        </fieldset>
-        <fieldset className="radio1">
-          <label>
-            <input type="radio" name="radio1" checked={separatorType === global.calc.separatorTypeComma} onChange={handleChangeSeparatorTypeComma} />
-            <span className="span_option">&nbsp;{strSeparatorLower}</span>
-          </label>
-        </fieldset>
+        <div className="div_option">
+          <fieldset className="checkbox1">
+            <label>
+              <input type="checkbox" name="checkbox1" checked={italicFlag} onChange={this.handleChangeItalic} />
+              <span className="span_option">&nbsp;{strItalic}</span>
+            </label>
+          </fieldset>
+          <div className="div_space"></div>
+          <div>
+            <span className="span_option">{strSeparator}:</span>
+          </div>
+          <fieldset className="radio1">
+            <label>
+              <input type="radio" name="radio1" checked={separatorType === global.calc.separatorTypeNone} onChange={this.handleChangeSeparatorTypeNone} />
+              <span className="span_option">&nbsp;{strSeparatorNone}</span>
+            </label>
+          </fieldset>
+          <fieldset className="radio1">
+            <label>
+              <input type="radio" name="radio1" checked={separatorType === global.calc.separatorTypeDash} onChange={this.handleChangeSeparatorTypeDash} />
+              <span className="span_option">&nbsp;{strSeparatorUpper}</span>
+            </label>
+          </fieldset>
+          <fieldset className="radio1">
+            <label>
+              <input type="radio" name="radio1" checked={separatorType === global.calc.separatorTypeComma} onChange={this.handleChangeSeparatorTypeComma} />
+              <span className="span_option">&nbsp;{strSeparatorLower}</span>
+            </label>
+          </fieldset>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 export default connect(myOptionStateToProps)(MyOption);
